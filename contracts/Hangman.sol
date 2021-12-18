@@ -27,16 +27,12 @@ contract Hangman {
     // Helper function that returns true if {where} is a substring of {what}
     function contains(string memory what, string memory where) view internal returns (bool) {
         if (bytes(where).length == 0 || bytes(what).length == 0) {
-            console.log("something empty");
             return false;
         }
         bytes memory whatBytes = bytes (what);
         bytes memory whereBytes = bytes (where);
-        console.log("laksjdf");
-        console.log(whereBytes.length > whatBytes.length);
 
         for (uint i = 0; i <= whereBytes.length - whatBytes.length; i++) {
-            console.log("hi");
             bool flag = true;
             for (uint j = 0; j < whatBytes.length; j++)
                 if (whereBytes [i + j] != whatBytes [j]) {
@@ -44,11 +40,9 @@ contract Hangman {
                     break;
                 }
             if (flag) {
-                console.log("found substring!!!!!!!");
                 return true;
             }
         }
-        console.log("did not contain the other");
         return false;
     }
 
@@ -71,8 +65,6 @@ contract Hangman {
 
         // Append to the current set of guesses
         guesses = string(abi.encodePacked(guesses, _guess));
-        console.log("updated guesses below");
-        console.log(guesses);
 
         // Check if the guess is correct
         if(!contains(_guess, secret)) {
