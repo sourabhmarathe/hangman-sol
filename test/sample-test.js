@@ -10,12 +10,9 @@ describe("Hangman", function () {
     expect(await hangman.solution()).to.equal("___");
 
     const makeGuessTx = await hangman.makeGuess("a");
-
-    // wait until the transaction is mined
     await makeGuessTx.wait();
 
     expect(await hangman.solution()).to.equal("a__");
-
     const makeGuessTx2 = await hangman.makeGuess("b");
     await makeGuessTx2.wait();
 
@@ -23,5 +20,32 @@ describe("Hangman", function () {
     await makeGuessTx3.wait();
 
     expect(await hangman.solution()).to.equal("abc");
+    expect(await hangman.lives()).to.equal(2);
   });
+
+  it("Should create and execute a loss while playing hangman", async function() {
+    const Hangman = await ethers.getContractFactory("Hangman");
+    const hangman = await Hangman.deploy("abc", 1);
+    await hangman.deployed();
+
+    const makeGuessTx = await hangman.makeGuess("f");
+    await makeGuessTx.wait();
+
+    expect(await hangman.lives()).to.equal(0);
+  })
+
+  it("Should create and execute illegal moves while playing hangman", async function() {
+    const Hangman = await ethers.getContractFactory("Hangman");
+    const hangman = await Hangman.deploy("abc", 10);
+    await hangman.deployed();
+
+    const makeGuessTx = await hangman.makeGuess("f");
+    await makeGuessTx.wait();
+
+    expect(await hangman.lives()).to.greaterThan(0);
+
+    const makeRepeatGuessTx = await hangman.makeGuess("f");
+    await makeGuessTx.wait();
+
+  })
 });

@@ -55,19 +55,15 @@ contract Hangman {
     }
 
     function makeGuess(string memory _guess) external {
-        console.log(_guess);
         require(bytes(_guess).length == 1, "you may only guess one character");
         require(contains(guesses, _guess), "you already guessed that");
-        console.log("hi");
+        require(lives > 0, "must have at least one life to make a guess");
 
         // Append to the current set of guesses
         string(abi.encodePacked(guesses, _guess));
-        console.log(guesses);
 
         // Check if the guess is correct
         if(!contains(_guess, secret)) {
-            console.log("wrong guess, minus one life");
-            console.log(secret);
             lives = lives - 1;
             if(lives == 0) {
                 emit Outcome("Guesser has lost");
