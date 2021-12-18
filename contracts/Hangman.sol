@@ -52,6 +52,10 @@ contract Hangman {
         return solution;
     }
 
+    function guessesMade() external view returns (string memory) {
+        return guesses;
+    }
+
     function makeGuess(string memory _guess) external {
         require(bytes(_guess).length == 1);
         require(!contains(_guess, guesses));
