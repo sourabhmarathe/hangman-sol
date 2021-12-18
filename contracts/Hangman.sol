@@ -5,9 +5,9 @@ import "hardhat/console.sol";
 
 contract Hangman {
     string private secret;
-    string private guesses;
-    string private solution;
-    uint16 private lives;
+    string public guesses;
+    string public solution;
+    uint16 public lives;
 
     constructor(string memory _secret, uint16 _lives) {
         secret = _secret;
@@ -46,14 +46,6 @@ contract Hangman {
             }
         }
         return true;
-    }
-
-    function currentSolution() external view returns (string memory) {
-        return solution;
-    }
-
-    function guessesMade() external view returns (string memory) {
-        return guesses;
     }
 
     function makeGuess(string memory _guess) external {
