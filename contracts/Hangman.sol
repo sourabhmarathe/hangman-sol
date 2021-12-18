@@ -25,7 +25,7 @@ contract Hangman {
     event IncorrectGuess(uint livesRemaining);
 
     // Helper function that returns true if {where} is a substring of {what}
-    function contains (string memory what, string memory where) pure internal returns (bool) {
+    function contains(string memory what, string memory where) view internal returns (bool) {
         bytes memory whatBytes = bytes (what);
         bytes memory whereBytes = bytes (where);
 
@@ -37,9 +37,11 @@ contract Hangman {
                     break;
                 }
             if (flag) {
+                console.log("found substring!!!!!!!");
                 return true;
             }
         }
+        console.log("did not contain the other");
         return false;
     }
 
@@ -54,12 +56,13 @@ contract Hangman {
         return true;
     }
 
+    // TODO: Contains is broken
     function makeGuess(string memory _guess) external {
         console.log("make a guess");
         console.log(guesses);
         console.log(_guess);
         require(bytes(_guess).length == 1, "you may only guess one character");
-        require(contains(guesses, _guess), "you already guessed that");
+        require(!contains(guesses, _guess), "you already guessed that");
         require(lives > 0, "must have at least one life to make a guess");
 
         // Append to the current set of guesses
