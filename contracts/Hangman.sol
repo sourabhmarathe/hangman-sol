@@ -29,8 +29,7 @@ contract Hangman {
         bytes memory whatBytes = bytes (what);
         bytes memory whereBytes = bytes (where);
 
-        bool found = false;
-        for (uint i = 0; i < whereBytes.length - whatBytes.length; i++) {
+        for (uint i = 0; i <= whereBytes.length - whatBytes.length; i++) {
             bool flag = true;
             for (uint j = 0; j < whatBytes.length; j++)
                 if (whereBytes [i + j] != whatBytes [j]) {
@@ -38,11 +37,10 @@ contract Hangman {
                     break;
                 }
             if (flag) {
-                found = true;
-                break;
+                return true;
             }
         }
-        return found;
+        return false;
     }
 
     function secretSolved() internal view returns (bool) {
