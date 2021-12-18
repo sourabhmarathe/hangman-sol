@@ -3,6 +3,7 @@ const { ethers } = require("hardhat");
 
 describe("Hangman", function () {
   it("Should create and execute a simple game of hangman", async function () {
+    console.log("-----------------------------------------------------------");
     const Hangman = await ethers.getContractFactory("Hangman");
     const hangman = await Hangman.deploy("abc", 2);
     await hangman.deployed();
@@ -24,6 +25,7 @@ describe("Hangman", function () {
   });
 
   it("Should create and execute a loss while playing hangman", async function() {
+    console.log("-----------------------------------------------------------");
     const Hangman = await ethers.getContractFactory("Hangman");
     const hangman = await Hangman.deploy("abc", 1);
     await hangman.deployed();
@@ -32,9 +34,10 @@ describe("Hangman", function () {
     await makeGuessTx.wait();
 
     expect(await hangman.lives()).to.equal(0);
-  })
+  });
 
   it("Should create and execute illegal moves while playing hangman", async function() {
+    console.log("-----------------------------------------------------------");
     const Hangman = await ethers.getContractFactory("Hangman");
     const hangman = await Hangman.deploy("abc", 10);
     await hangman.deployed();
@@ -44,8 +47,6 @@ describe("Hangman", function () {
 
     expect(await hangman.lives()).to.greaterThan(0);
 
-    const makeRepeatGuessTx = await hangman.makeGuess("f");
-    await makeGuessTx.wait();
-
-  })
+    await expect(hangman.makeGuess("f")).to.be.reverted;
+  });
 });
