@@ -9,14 +9,16 @@ describe("Hangman", function () {
     await hangman.deployed();
 
     expect(await hangman.solution()).to.equal("___");
-
+    console.log("start");
     const makeGuessTx = await hangman.makeGuess("a");
     await makeGuessTx.wait();
 
     expect(await hangman.solution()).to.equal("a__");
+    console.log("guess b");
     const makeGuessTx2 = await hangman.makeGuess("b");
     await makeGuessTx2.wait();
 
+    console.log("guess c");
     const makeGuessTx3 = await hangman.makeGuess("c");
     await makeGuessTx3.wait();
 
