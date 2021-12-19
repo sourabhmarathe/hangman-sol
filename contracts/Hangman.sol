@@ -55,7 +55,6 @@ contract Hangman {
         return true;
     }
 
-    // TODO: Contains is broken
     function makeGuess(string memory _guess) external {
         require(bytes(_guess).length == 1, "you may only guess one character");
         require(!contains(_guess, guesses), "you already guessed that");
