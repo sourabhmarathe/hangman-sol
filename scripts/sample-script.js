@@ -15,7 +15,7 @@ async function main() {
 
   // We get the contract to deploy
   const Hangman = await hre.ethers.getContractFactory("Hangman");
-  const hangman = await Hangman.deploy("Hello, Hardhat!"); //TODO: Need the right deploy params
+  const hangman = await Hangman.deploy("asdfghjkl", 5);
 
   await hangman.deployed();
 

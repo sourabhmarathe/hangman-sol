@@ -1,8 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
-
 contract Hangman {
     string private secret;
     string public guesses;
@@ -25,7 +23,7 @@ contract Hangman {
     event IncorrectGuess(uint livesRemaining);
 
     // Helper function that returns true if {where} is a substring of {what}
-    function contains(string memory what, string memory where) view internal returns (bool) {
+    function contains(string memory what, string memory where) pure internal returns (bool) {
         if (bytes(where).length == 0 || bytes(what).length == 0) {
             return false;
         }
