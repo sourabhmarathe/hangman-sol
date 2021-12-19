@@ -6,6 +6,7 @@
 const hre = require("hardhat");
 
 async function main() {
+  console.log("Deploying to ropsten");
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
   //
@@ -15,6 +16,7 @@ async function main() {
 
   // We get the contract to deploy
   const Hangman = await hre.ethers.getContractFactory("Hangman");
+  console.log("Retrieved the contract from the factory");
   const hangman = await Hangman.deploy("asdfghjkl", 5);
 
   await hangman.deployed();

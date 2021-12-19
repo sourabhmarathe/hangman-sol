@@ -11,7 +11,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 // Alchemy API Key
-const ALCHEMY_API_KEY = "2gnYBlIldqfw8qvCtRJlwg_xkVndurwO";
+const ALCHEMY_API_KEY = "u1gysRCndzQRhsAR2v0q2NnZC8G87Re8";
 
 // Ropsten private key
 const ROPSTEN_PRIVATE_KEY = "329565c00f153d7ec1a97eee59bd6b42c5e6bb9d14f116f7af4b1397c1759c3f";
